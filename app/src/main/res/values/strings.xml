@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MVVMComposeTemplate</string>
+
+    <string name="not_available">Not available</string>
+
+    <string name="price_usd_vs_time">price (usd) vs time</string>
+    <string name="building_chart">Building chart…</string>
 </resources>
