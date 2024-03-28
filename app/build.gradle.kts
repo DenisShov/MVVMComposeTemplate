@@ -125,6 +125,8 @@ dependencies {
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion")
     testImplementation("androidx.arch.core:core-testing:$archCoreTestingVersion")
+    testImplementation("org.amshove.kluent:kluent-android:1.68")
+    testImplementation("app.cash.turbine:turbine:0.12.0") // For Flow testing
     androidTestImplementation("androidx.test.ext:junit:$androidxJunitVersion")
     androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
