@@ -32,8 +32,10 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.dshovhenia.mvvm.compose.template.core.extension.formatPrice
+import com.dshovhenia.mvvm.compose.template.core.extension.formatToPercentage
 import com.dshovhenia.mvvm.compose.template.data.entity.CoinMarkets
 import com.dshovhenia.mvvm.compose.template.theme.AppTheme
+import com.dshovhenia.mvvm.compose.template.theme.NegativeTrend
 import com.dshovhenia.mvvm.compose.template.theme.PositiveTrend
 import com.dshovhenia.mvvm.compose.template.theme.StocksDarkPrimaryText
 import timber.log.Timber
@@ -119,12 +121,17 @@ onCoinItemClick: () -> Unit,
                         shape = MaterialTheme.shapes.small,
                         colors =
                         CardDefaults.cardColors(
-                            containerColor = PositiveTrend,
+                            containerColor =
+                            if (item.priceChangePercentage24h > 0) {
+                            PositiveTrend
+                            } else {
+                            NegativeTrend
+                            },
                             contentColor = Color.White,
                         ),
                     ) {
                         Text(
-                            text = item.priceChangePercentage24h.formatPrice(),
+                            text = item.priceChangePercentage24h.formatToPercentage(),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier =
                             Modifier
@@ -167,7 +174,7 @@ private fun CoinWithMarketDataItemPreview() {
             item =
             CoinMarkets(
                 id = "",
-                name = "Bitcoin BitcoinBitcoinBitcoinBitcoinBitcoin",
+                name = "Bitcoin",
                 symbol = "BTC",
                 image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
                 marketCapRank = 1,
