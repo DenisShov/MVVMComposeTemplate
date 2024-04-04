@@ -19,3 +19,24 @@ maximumFractionDigits: Int = 8,
         price
     }
 }
+
+fun Number.formatToPercentage(): String {
+    val numberFormat =
+    NumberFormat.getPercentInstance(Locale.US).apply {
+        maximumFractionDigits = 3
+        minimumFractionDigits = 2
+    }
+
+    val valueToFormat: Double = toDouble() / 100
+    var formattedValue: String = numberFormat.format(valueToFormat)
+
+    formattedValue =
+    if (formattedValue.startsWith("+") || formattedValue.startsWith("-")) {
+        formattedValue
+    } else {
+        val sign = if (valueToFormat >= 0) "+" else "-"
+        sign.plus(formattedValue)
+    }
+
+    return formattedValue
+}
