@@ -29,8 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil.compose.AsyncImage
 import com.dshovhenia.mvvm.compose.template.core.extension.formatPrice
 import com.dshovhenia.mvvm.compose.template.core.extension.formatToPercentage
 import com.dshovhenia.mvvm.compose.template.data.entity.CoinMarkets
@@ -43,9 +42,9 @@ import timber.log.Timber
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CoinWithMarketDataItem(
-modifier: Modifier = Modifier,
-item: CoinMarkets,
-onCoinItemClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    item: CoinMarkets,
+    onCoinItemClick: () -> Unit,
 ) {
     Card(
         modifier = modifier.wrapContentHeight(),
@@ -123,9 +122,9 @@ onCoinItemClick: () -> Unit,
                         CardDefaults.cardColors(
                             containerColor =
                             if (item.priceChangePercentage24h > 0) {
-                            PositiveTrend
+                                PositiveTrend
                             } else {
-                            NegativeTrend
+                                NegativeTrend
                             },
                             contentColor = Color.White,
                         ),
@@ -148,15 +147,14 @@ onCoinItemClick: () -> Unit,
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun CoinIcon(
-modifier: Modifier = Modifier,
-imageUrl: String,
-size: Dp = 30.dp,
-shape: Shape = MaterialTheme.shapes.medium,
+    modifier: Modifier = Modifier,
+    imageUrl: String,
+    size: Dp = 30.dp,
+    shape: Shape = MaterialTheme.shapes.medium,
 ) {
-    GlideImage(
+    AsyncImage(
         model = imageUrl,
         modifier =
         modifier
