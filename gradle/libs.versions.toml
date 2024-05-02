@@ -1,0 +1,77 @@
+[versions]
+agp = "8.3.1"
+kotlin = "1.9.22"
+hilt = "2.50"
+ksp = "1.9.22-1.0.17"
+detekt = "1.23.5"
+ktlint = "12.1.0"
+appCompatVersion = "1.5.1"
+kotlinCoroutinesCore = "1.6.4"
+retrofitVersion = "2.9.0"
+okhttp3Version = "4.10.0"
+timberVersion = "5.0.1"
+coroutinesVersion = "1.6.4"
+desugarVersion = "1.1.5"
+lifecycleKtxVersion = "2.5.1"
+composeVersion = "1.3.0"
+composeMaterial3 = "1.0.1"
+activityCompose = "1.6.1"
+navigationHilt = "1.5.0"
+junitVersion = "4.13.2"
+androidxJunitVersion = "1.1.3"
+espressoCoreVersion = "3.4.0"
+mockkVersion = "1.12.3"
+coroutinesTestVersion = "1.6.0"
+archCoreTestingVersion = "2.1.0"
+mpAndroidChartVersion = "v3.1.0"
+kluentVersion = "1.68"
+turbineVersion = "0.12.0"
+coilComposeVersion = "2.6.0"
+
+[libraries]
+kotlinCoroutinesCoreLib = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinCoroutinesCore" }
+hiltAndroidLib = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hiltAndroidCompilerLib = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+tooldDesugarJdkLib = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarVersion" }
+coreKtxLib = { group = "androidx.core", name = "core-ktx", version.ref = "kotlin" }
+appcompatLib = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompatVersion" }
+lifecycleLivedataKtxLib = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleKtxVersion" }
+lifecycleViewmodelKtxLib = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleKtxVersion" }
+kotlinxCoroutinesAndroidLib = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+timberLib = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
+lifecycleRuntimeKtxLib = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleKtxVersion" }
+coilComposeLib = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilComposeVersion" }
+composeUiLib = { group = "androidx.compose.ui", name = "ui", version.ref = "composeVersion" }
+composeUiUtilLib = { group = "androidx.compose.ui", name = "ui-util", version.ref = "composeVersion" }
+composeUiToolingPreviewLib = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeVersion" }
+composeFoundationLib = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeVersion" }
+composeMaterial3Lib = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
+composeMaterialIconsExtendedLib = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeVersion" }
+lifecycleViewmodelComposeLib = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleKtxVersion" }
+composeRuntimeLivedataLib = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "composeVersion" }
+composeActivityLib = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+navigationHiltLib = { group = "dev.olshevski.navigation", name = "reimagined-hilt", version.ref = "navigationHilt" }
+mpAndroidChartLib = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mpAndroidChartVersion" }
+retrofitLib = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+converterGsonLib = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+loggingInterceptorLib = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version" }
+detektFormattingLib = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+junitLib = { group = "junit", name = "junit", version.ref = "junitVersion" }
+mockkLib = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
+kotlinxCoroutinesTestLib = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTestVersion" }
+coreTestingLib = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTestingVersion" }
+kluentAndroidLib = { group = "org.amshove.kluent", name = "kluent-android", version.ref = "kluentVersion" }
+turbineLib = { group = "app.cash.turbine", name = "turbine", version.ref = "turbineVersion" }
+testExtLib = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunitVersion" }
+espressoCoreLib = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
+uiTestJunit4Lib = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "composeVersion" }
+uiToolkitLib = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeVersion" }
+uiTestManifestLib = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "composeVersion" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+devToolKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+detektAndroid = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlintAndroid = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

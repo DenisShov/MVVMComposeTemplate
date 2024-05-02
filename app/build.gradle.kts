@@ -59,79 +59,61 @@ android {
 }
 
 dependencies {
-    val composeVersion = "1.3.0"
-    val hiltVersion = "2.50"
-    val coreKtxVersion = "1.9.0"
-    val junitVersion = "4.13.2"
-    val androidxJunitVersion = "1.1.3"
-    val espressoCoreVersion = "3.4.0"
-    val lifecycleKtxVersion = "2.5.1"
-    val mockkVersion = "1.12.3"
-    val coroutinesTestVersion = "1.6.0"
-    val archCoreTestingVersion = "2.1.0"
-    val retrofitVersion = "2.9.0"
-    val timberVersion = "5.0.1"
-    val coroutinesVersion = "1.6.4"
-    val desugarVersion = "1.1.5"
-
     // Flow
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation(libs.kotlinCoroutinesCoreLib)
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(libs.hiltAndroidLib)
+    ksp(libs.hiltAndroidCompilerLib)
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugarVersion")
+    coreLibraryDesugaring(libs.tooldDesugarJdkLib)
 
-    implementation("androidx.core:core-ktx:$coreKtxVersion")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleKtxVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleKtxVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation(libs.coreKtxLib)
+    implementation(libs.appcompatLib)
+    implementation(libs.lifecycleLivedataKtxLib)
+    implementation(libs.lifecycleViewmodelKtxLib)
+    implementation(libs.kotlinxCoroutinesAndroidLib)
+    implementation(libs.kotlinCoroutinesCoreLib)
 
     // Timber
-    implementation("com.jakewharton.timber:timber:$timberVersion")
+    implementation(libs.timberLib)
 
     // Compose
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.ui:ui-util:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.compose.foundation:foundation:$composeVersion")
-    implementation("androidx.compose.material3:material3:1.0.1")
-    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleKtxVersion")
-    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation("dev.olshevski.navigation:reimagined-hilt:1.5.0")
-    implementation("com.github.bumptech.glide:compose:1.0.0-alpha.1") {
-        exclude(group = "androidx.test")
-    }
+    implementation(libs.composeUiLib)
+    implementation(libs.composeUiUtilLib)
+    implementation(libs.composeUiToolingPreviewLib)
+    implementation(libs.composeFoundationLib)
+    implementation(libs.composeMaterial3Lib)
+    implementation(libs.composeMaterialIconsExtendedLib)
+    implementation(libs.lifecycleRuntimeKtxLib)
+    implementation(libs.lifecycleViewmodelComposeLib)
+    implementation(libs.composeRuntimeLivedataLib)
+    implementation(libs.composeActivityLib)
+    implementation(libs.navigationHiltLib)
+    implementation(libs.coilComposeLib)
 
     // Chart
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.mpAndroidChartLib)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(libs.retrofitLib)
+    implementation(libs.converterGsonLib)
+    implementation(libs.loggingInterceptorLib)
 
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5")
+    detektPlugins(libs.detektFormattingLib)
 
     // Test
-    testImplementation("junit:junit:$junitVersion")
-    testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion")
-    testImplementation("androidx.arch.core:core-testing:$archCoreTestingVersion")
-    testImplementation("org.amshove.kluent:kluent-android:1.68")
-    testImplementation("app.cash.turbine:turbine:0.12.0") // For Flow testing
-    androidTestImplementation("androidx.test.ext:junit:$androidxJunitVersion")
-    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
+    testImplementation(libs.junitLib)
+    testImplementation(libs.mockkLib)
+    testImplementation(libs.kotlinxCoroutinesTestLib)
+    testImplementation(libs.coreTestingLib)
+    testImplementation(libs.kluentAndroidLib)
+    testImplementation(libs.turbineLib) // For Flow testing
+    androidTestImplementation(libs.testExtLib)
+    androidTestImplementation(libs.espressoCoreLib)
+    androidTestImplementation(libs.uiTestJunit4Lib)
+    debugImplementation(libs.uiToolkitLib)
+    debugImplementation(libs.uiTestManifestLib)
 }
 
 // DETEKT
