@@ -1,13 +1,13 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.devToolKsp)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.detektAndroid)
+    alias(libs.plugins.ktlintAndroid)
     id("kotlin-parcelize")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
-    id("io.gitlab.arturbosch.detekt")
-    id("org.jlleitschuh.gradle.ktlint")
     id("jacoco")
 }
 
