@@ -53,6 +53,7 @@ import androidx.core.os.bundleOf
 import com.dshovhenia.mvvm.compose.template.Constants
 import com.dshovhenia.mvvm.compose.template.Constants.COIN_DETAIL_PARAMETER
 import com.dshovhenia.mvvm.compose.template.R
+import com.dshovhenia.mvvm.compose.template.core.extension.correspondingTrendColor
 import com.dshovhenia.mvvm.compose.template.core.extension.formatPrice
 import com.dshovhenia.mvvm.compose.template.core.extension.toErrorMessage
 import com.dshovhenia.mvvm.compose.template.core.extension.toLocalDateTime
@@ -199,7 +200,9 @@ viewModel: CoinDetailViewModel,
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(8.dp),
-                    chartData = state.coinChartData.prices,
+                    data = state.coinChartData,
+                    graphColor = state.priceChangePercentage.correspondingTrendColor(),
+                    showDashedLine = true,
                 )
             }
 

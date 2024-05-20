@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dshovhenia.mvvm.compose.template.Constants
-import com.dshovhenia.mvvm.compose.template.data.entity.CoinChartData
 import com.dshovhenia.mvvm.compose.template.data.entity.CoinMarkets
 import com.dshovhenia.mvvm.compose.template.domain.error.AppError
 import com.dshovhenia.mvvm.compose.template.domain.functional.fold
@@ -17,6 +16,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,7 +42,7 @@ class CoinDetailViewModel @Inject constructor(
     sealed interface CoinChartState {
         data class Loading(val isLoading: Boolean = true) : CoinChartState
 
-        data class Success(val coinChartData: CoinChartData) : CoinChartState
+        data class Success(val coinChartData: List<BigDecimal>, val priceChangePercentage: Double) : CoinChartState
 
         data class Error(val error: AppError) : CoinChartState
     }
@@ -74,7 +74,13 @@ class CoinDetailViewModel @Inject constructor(
                         result.fold(
                             onSuccess = { cryptoChartData ->
                                 _uiState.update {
-                                    it.copy(coinChart = CoinChartState.Success(cryptoChartData))
+                                    it.copy(
+                                        coinChart =
+                                        CoinChartState.Success(
+                                            cryptoChartData,
+                                            getPriceChangePercentage(cryptoChartData),
+                                        ),
+                                    )
                                 }
                             },
                             onFailure = { error ->
@@ -87,5 +93,12 @@ class CoinDetailViewModel @Inject constructor(
                     .launchIn(viewModelScope)
             }
         }
+    }
+
+    private fun getPriceChangePercentage(cryptoChartData: List<BigDecimal>): Double {
+        val startPrice = cryptoChartData.first().toDouble()
+        val lastPrice = cryptoChartData.last().toDouble()
+        val priceChangePercentage: Double = ((lastPrice - startPrice) / startPrice) * 100
+        return priceChangePercentage
     }
 }

@@ -23,7 +23,6 @@ espressoCoreVersion = "3.4.0"
 mockkVersion = "1.12.3"
 coroutinesTestVersion = "1.6.0"
 archCoreTestingVersion = "2.1.0"
-mpAndroidChartVersion = "v3.1.0"
 kluentVersion = "1.68"
 turbineVersion = "0.12.0"
 coilComposeVersion = "2.6.0"
@@ -51,7 +50,6 @@ lifecycleViewmodelComposeLib = { group = "androidx.lifecycle", name = "lifecycle
 composeRuntimeLivedataLib = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "composeVersion" }
 composeActivityLib = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 navigationHiltLib = { group = "dev.olshevski.navigation", name = "reimagined-hilt", version.ref = "navigationHilt" }
-mpAndroidChartLib = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mpAndroidChartVersion" }
 retrofitLib = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 converterGsonLib = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 loggingInterceptorLib = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version" }

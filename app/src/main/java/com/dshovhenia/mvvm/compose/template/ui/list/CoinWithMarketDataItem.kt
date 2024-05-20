@@ -42,9 +42,9 @@ import timber.log.Timber
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CoinWithMarketDataItem(
-    modifier: Modifier = Modifier,
-    item: CoinMarkets,
-    onCoinItemClick: () -> Unit,
+modifier: Modifier = Modifier,
+item: CoinMarkets,
+onCoinItemClick: () -> Unit,
 ) {
     Card(
         modifier = modifier.wrapContentHeight(),
@@ -149,10 +149,10 @@ fun CoinWithMarketDataItem(
 
 @Composable
 fun CoinIcon(
-    modifier: Modifier = Modifier,
-    imageUrl: String,
-    size: Dp = 30.dp,
-    shape: Shape = MaterialTheme.shapes.medium,
+modifier: Modifier = Modifier,
+imageUrl: String,
+size: Dp = 30.dp,
+shape: Shape = MaterialTheme.shapes.medium,
 ) {
     AsyncImage(
         model = imageUrl,
