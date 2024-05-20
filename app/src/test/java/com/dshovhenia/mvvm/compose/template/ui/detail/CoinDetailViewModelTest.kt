@@ -9,8 +9,9 @@ import com.dshovhenia.mvvm.compose.template.data.entity.CoinMarkets
 import com.dshovhenia.mvvm.compose.template.domain.error.AppError
 import com.dshovhenia.mvvm.compose.template.domain.functional.DataResult
 import com.dshovhenia.mvvm.compose.template.domain.usecase.GetCoinChartUseCase
-import com.dshovhenia.mvvm.compose.template.mocks.testCoinChartData
 import com.dshovhenia.mvvm.compose.template.mocks.testCoinMarkets
+import com.dshovhenia.mvvm.compose.template.mocks.testPriceChangePercentage
+import com.dshovhenia.mvvm.compose.template.mocks.testResponseListFiltered
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -24,7 +25,7 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CoinDetailViewModelTest : BaseCoroutineTestWithInstantTaskExecutorRule() {
-private lateinit var vieModel: CoinDetailViewModel
+    private lateinit var vieModel: CoinDetailViewModel
 
     @MockK
     private lateinit var getCoinChartUseCase: GetCoinChartUseCase
@@ -37,56 +38,56 @@ private lateinit var vieModel: CoinDetailViewModel
         MockKAnnotations.init(this)
 
         vieModel =
-        CoinDetailViewModel(
-            savedStateHandle = savedStateHandle,
-            getCoinChartUseCase = getCoinChartUseCase,
-        )
+            CoinDetailViewModel(
+                savedStateHandle = savedStateHandle,
+                getCoinChartUseCase = getCoinChartUseCase,
+            )
     }
 
     @Test
     fun `test getCryptoChart`() =
-    runTest {
-        coEvery { savedStateHandle.get<CoinMarkets>(COIN_DETAIL_PARAMETER) } returns testCoinMarkets
+        runTest {
+            coEvery { savedStateHandle.get<CoinMarkets>(COIN_DETAIL_PARAMETER) } returns testCoinMarkets
 
-        coEvery { getCoinChartUseCase.launch(any(), any()) } returns
-        flow {
-            emit(DataResult.Success(testCoinChartData))
+            coEvery { getCoinChartUseCase.launch(any(), any()) } returns
+                    flow {
+                        emit(DataResult.Success(testResponseListFiltered))
+                    }
+
+            val days = Constants.ONE_DAY
+
+            vieModel.getCryptoChart(days)
+
+            vieModel.uiState.test {
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(true)))
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(false)))
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Success(testResponseListFiltered, testPriceChangePercentage)))
+
+                cancelAndConsumeRemainingEvents()
+            }
         }
-
-        val days = Constants.ONE_DAY
-
-        vieModel.getCryptoChart(days)
-
-        vieModel.uiState.test {
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(true)))
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(false)))
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Success(testCoinChartData)))
-
-            cancelAndConsumeRemainingEvents()
-        }
-    }
 
     @Test
     fun `test getCryptoChart handles error`() =
-    runTest {
-        coEvery { savedStateHandle.get<CoinMarkets>(COIN_DETAIL_PARAMETER) } returns testCoinMarkets
+        runTest {
+            coEvery { savedStateHandle.get<CoinMarkets>(COIN_DETAIL_PARAMETER) } returns testCoinMarkets
 
-        val exception = mockk<IllegalStateException>()
-        coEvery { getCoinChartUseCase.launch(any(), any()) } returns
-        flow {
-            emit(DataResult.Failure(AppError.GeneralError(exception)))
+            val exception = mockk<IllegalStateException>()
+            coEvery { getCoinChartUseCase.launch(any(), any()) } returns
+                    flow {
+                        emit(DataResult.Failure(AppError.GeneralError(exception)))
+                    }
+
+            val days = Constants.ONE_DAY
+
+            vieModel.getCryptoChart(days)
+
+            vieModel.uiState.test {
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(true)))
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(false)))
+                awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Error(AppError.GeneralError(exception))))
+
+                cancelAndConsumeRemainingEvents()
+            }
         }
-
-        val days = Constants.ONE_DAY
-
-        vieModel.getCryptoChart(days)
-
-        vieModel.uiState.test {
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(true)))
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Loading(false)))
-            awaitItem().shouldBeEqualTo(CoinDetailViewModel.State(CoinDetailViewModel.CoinChartState.Error(AppError.GeneralError(exception))))
-
-            cancelAndConsumeRemainingEvents()
-        }
-    }
 }

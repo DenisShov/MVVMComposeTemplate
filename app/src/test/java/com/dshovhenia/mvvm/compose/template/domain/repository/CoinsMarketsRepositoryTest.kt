@@ -10,15 +10,13 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.Before
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class CoinsMarketsRepositoryTest : BaseCoroutineTestWithTestDispatcherProvider() {
-private lateinit var repository: CoinsMarketsRepository
+    private lateinit var repository: CoinsMarketsRepository
 
     @MockK
     private lateinit var getCoinsMarketsStore: GetCoinsMarketsStore
@@ -31,39 +29,39 @@ private lateinit var repository: CoinsMarketsRepository
         MockKAnnotations.init(this)
 
         repository =
-        CoinsMarketsRepository(
-            getCoinsMarketsStore = getCoinsMarketsStore, getCoinChartStore = getCoinChartStore,
-        )
+            CoinsMarketsRepository(
+                getCoinsMarketsStore = getCoinsMarketsStore, getCoinChartStore = getCoinChartStore,
+            )
     }
 
     @Test
     fun `test getCoinsMarkets`() =
-    runTest {
-        coEvery { getCoinsMarketsStore.getCoinsMarkets() } returns testCoinMarketsList
+        runTest {
+            coEvery { getCoinsMarketsStore.getCoinsMarkets() } returns testCoinMarketsList
 
-        val coinMarkets = repository.getCoinsMarkets()
+            val coinMarkets = repository.getCoinsMarkets()
 
-        coinMarkets.shouldBeEqualTo(testCoinMarketsList)
+            coinMarkets.shouldBeEqualTo(testCoinMarketsList)
 
-        coVerify(exactly = 1) {
-            getCoinsMarketsStore.getCoinsMarkets()
+            coVerify(exactly = 1) {
+                getCoinsMarketsStore.getCoinsMarkets()
+            }
         }
-    }
 
     @Test
     fun `test getCoinChart`() =
-    runTest {
-        coEvery { getCoinChartStore.getCoinChart(any(), any()) } returns testCoinChartData
+        runTest {
+            coEvery { getCoinChartStore.getCoinChart(any(), any()) } returns testCoinChartData
 
-        val id = "btc"
-        val days = Constants.ONE_DAY
+            val id = "btc"
+            val days = Constants.ONE_DAY
 
-        val coinMarkets = repository.getCoinChart(id, days)
+            val coinMarkets = repository.getCoinChart(id, days)
 
-        coinMarkets.shouldBeEqualTo(testCoinChartData)
+            coinMarkets.shouldBeEqualTo(testCoinChartData)
 
-        coVerify(exactly = 1) {
-            getCoinChartStore.getCoinChart(id, days)
+            coVerify(exactly = 1) {
+                getCoinChartStore.getCoinChart(id, days)
+            }
         }
-    }
 }

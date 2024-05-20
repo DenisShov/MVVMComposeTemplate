@@ -92,9 +92,6 @@ dependencies {
     implementation(libs.navigationHiltLib)
     implementation(libs.coilComposeLib)
 
-    // Chart
-    implementation(libs.mpAndroidChartLib)
-
     // Retrofit
     implementation(libs.retrofitLib)
     implementation(libs.converterGsonLib)
